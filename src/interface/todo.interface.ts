@@ -4,4 +4,5 @@ export interface ListItem {
 	id: string;
 	createdAt: string;
 	updatedAt: string;
+	isEdit?: boolean;
 }

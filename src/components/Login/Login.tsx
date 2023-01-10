@@ -22,7 +22,10 @@ function Login() {
 	};
 
 	const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-		if (e.key === 'Enter') handleLogin();
+		if (e.key === 'Enter') {
+			handleLogin();
+			e.currentTarget.blur();
+		}
 	};
 
 	const handleLogin = async () => {

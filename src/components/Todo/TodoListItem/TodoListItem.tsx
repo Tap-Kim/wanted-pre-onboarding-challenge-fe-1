@@ -1,14 +1,13 @@
 /** @jsxImportSource @emotion/react */
-import dayjs from 'dayjs';
 import { ListItem } from 'interface/todo.interface';
-import React, { ChangeEvent, EventHandler, MouseEventHandler } from 'react';
+import React, { ChangeEvent, MouseEventHandler } from 'react';
+import { formatDate } from 'utils/util';
 import { ItemWrapper } from './style';
 
 const deleteIcon = `${process.env.PUBLIC_URL}/icons/delete.png`;
 const editIcon = `${process.env.PUBLIC_URL}/icons/edit.png`;
 
 interface Props extends ListItem {
-	isEditMode: boolean;
 	handleClickTodo: MouseEventHandler<HTMLLIElement>;
 	handleDelete: MouseEventHandler<HTMLImageElement>;
 	handleEdit: MouseEventHandler<HTMLImageElement>;
@@ -19,19 +18,19 @@ interface Props extends ListItem {
 }
 
 function TodoListItem({
-	isEditMode,
 	id,
 	title,
 	content,
 	createdAt,
 	updatedAt,
+	isEdit,
 	handleClickTodo,
 	handleDelete,
 	handleEdit,
 	handleChange,
 }: Props) {
-	const create = dayjs(createdAt, 'YYYY-MM-DD HH:mm:ss').format('YY-MM-DD');
-	const update = dayjs(updatedAt, 'YYYY-MM-DD HH:mm:ss').format('YY-MM-DD');
+	const create = formatDate(createdAt);
+	const update = formatDate(updatedAt);
 	return (
 		<li
 			css={ItemWrapper}
@@ -40,7 +39,7 @@ function TodoListItem({
 			onClick={handleClickTodo}
 		>
 			<div className="todo_title">
-				{isEditMode ? (
+				{isEdit ? (
 					<input
 						data-id={id}
 						value={title}
@@ -48,11 +47,11 @@ function TodoListItem({
 						onChange={(e) => handleChange(e, 'title')}
 					/>
 				) : (
-					title
+					<p title={title}>{title}</p>
 				)}
 			</div>
 			<div className="todo_content">
-				{isEditMode ? (
+				{isEdit ? (
 					<input
 						data-id={id}
 						value={content}
@@ -60,27 +59,34 @@ function TodoListItem({
 						onChange={(e) => handleChange(e, 'content')}
 					/>
 				) : (
-					content
+					<p title={content}>{content}</p>
 				)}
 			</div>
-			<div className="todo_create_at">{create}</div>
-			<div className="todo_update_at">{update}</div>
-			<img
-				src={deleteIcon}
-				role="presentation"
-				alt="delete_icon"
-				className="btn_update"
-				data-id={id}
-				onClick={handleDelete}
-			/>
-			<img
-				src={editIcon}
-				role="presentation"
-				alt="editIcon"
-				className="btn_delete"
-				data-id={id}
-				onClick={handleEdit}
-			/>
+
+			<div className="todo_create_at">
+				<p title={create}>{create}</p>
+			</div>
+			<div className="todo_update_at">
+				<p title={update}>{update}</p>
+			</div>
+			<div className="todo_btn_area">
+				<img
+					src={deleteIcon}
+					role="presentation"
+					alt="delete_icon"
+					className="btn_update"
+					data-id={id}
+					onClick={handleDelete}
+				/>
+				<img
+					src={editIcon}
+					role="presentation"
+					alt="editIcon"
+					className="btn_delete"
+					data-id={id}
+					onClick={handleEdit}
+				/>
+			</div>
 		</li>
 	);
 }

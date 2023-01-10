@@ -22,9 +22,7 @@ instance.interceptors.request.use(
 			},
 		};
 	},
-	(error) => {
-		return Promise.reject(error);
-	}
+	(error) => Promise.reject(error)
 );
 
 instance.interceptors.response.use(
@@ -51,7 +49,6 @@ instance.interceptors.response.use(
 					return response?.data as ErrorResult;
 			}
 		}
-		console.error('Request Error Occur.', error);
 		return Promise.reject(new Error('Request Error Occur.'));
 	}
 );

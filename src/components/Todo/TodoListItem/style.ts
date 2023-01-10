@@ -14,16 +14,26 @@ export const TodoCommonStyle = css`
 
 export const TodoWidthStyle = css`
 	.todo_title {
-		width: 150px;
+		width: 20%;
 	}
 	.todo_content {
-		width: 350px;
+		width: 30%;
 	}
 	.todo_create_at {
-		width: 130px;
+		width: 20%;
 	}
 	.todo_update_at {
-		width: 130px;
+		width: 20%;
+	}
+	.todo_btn_area {
+		width: 10%;
+	}
+
+	p {
+		display: block;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	.button {
