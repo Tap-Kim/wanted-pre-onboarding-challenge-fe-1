@@ -1,7 +1,7 @@
 import { createTodo, deleteTodo, getTodos, updateTodo } from 'api/todo.api';
 import { ErrorResult } from 'interface/api.interface';
 import { ListItem } from 'interface/todo.interface';
-import { MouseEvent, useEffect, useState } from 'react';
+import { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'recoil/modal.recoil';
@@ -70,22 +70,48 @@ const useTodo = () => {
 		});
 	};
 
-	const onCallDelete = async (id: string) => {
-		const data = await deleteTodo(id);
-		if (data.data !== null) {
-			setModal({
-				isOpen: true,
-				message: (data as unknown as ErrorResult).details,
-			});
-			return;
-		}
+	const onCallDelete = (id: string) => {
+		setModal({
+			isOpen: true,
+			message: '일감을 지우시겠습니까?',
+			handleClose: () => {},
+			handleOk: async () => {
+				const data = await deleteTodo(id);
+				if (data.data !== null) {
+					setModal({
+						isOpen: true,
+						message: (data as unknown as ErrorResult).details,
+					});
+					return;
+				}
 
-		setTodos((prev) => prev.filter((todo) => todo.id !== id));
+				setTodos((prev) => prev.filter((todo) => todo.id !== id));
+			},
+		});
 	};
 
 	const onSetEditTodos = (id: string) => {
 		const newTodos = todos.map((item) => ({ ...item, isEdit: item.id === id }));
 		setTodos(newTodos);
+	};
+
+	const handleChange = (
+		event: ChangeEvent<HTMLInputElement>,
+		type: 'title' | 'content'
+	) => {
+		event.stopPropagation();
+		const target = event.target as HTMLInputElement;
+		const { id } = target.dataset;
+
+		const newTodos = todos.map((item) =>
+			item.id === id ? { ...item, [type]: target.value } : item
+		);
+		setTodos(newTodos);
+	};
+
+	const handleClickTodo = (event: MouseEvent<HTMLLIElement>) => {
+		const { id } = (event.target as HTMLLIElement).dataset;
+		navigate(`/todo/${id}`);
 	};
 
 	return {
@@ -94,8 +120,9 @@ const useTodo = () => {
 		handleAddTodo,
 		handleDelete,
 		handleEdit,
+		handleChange,
+		handleClickTodo,
 		onCallDelete,
-		navigate,
 	};
 };
 

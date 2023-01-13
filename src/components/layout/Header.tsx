@@ -4,6 +4,7 @@ import React from 'react';
 import { _flexbox } from 'styles/mixin.style';
 
 function Header() {
+	const user = localStorage.getItem('email');
 	return (
 		<header
 			css={css`
@@ -13,12 +14,26 @@ function Header() {
 				color: #000000;
 				background-color: #a4a4a4;
 
+				position: sticky;
+				top: 0; /* 클래스 sticky인 요소 안에서 top값이 0이되면 sticky를 적용 */
+				background: #ffffff;
+
+				border: 0px 0px 1px 0px solid;
+
 				& h2 {
-					color: #ffffff;
+					color: #0048ff;
+				}
+				& strong {
+					color: #3859adc9;
+					margin-right: 20px;
 				}
 			`}
 		>
-			<h2>Pre-Test</h2>
+			<h2>ToDo List</h2>
+			<strong>
+				{user}
+				{user && '님'}
+			</strong>
 		</header>
 	);
 }

@@ -43,6 +43,7 @@ function TodoListItem({
 					<input
 						data-id={id}
 						value={title}
+						placeholder="제목을 입력해주세요."
 						onClick={(e) => e.stopPropagation()}
 						onChange={(e) => handleChange(e, 'title')}
 					/>
@@ -55,6 +56,7 @@ function TodoListItem({
 					<input
 						data-id={id}
 						value={content}
+						placeholder="내용을 입력해주세요."
 						onClick={(e) => e.stopPropagation()}
 						onChange={(e) => handleChange(e, 'content')}
 					/>
