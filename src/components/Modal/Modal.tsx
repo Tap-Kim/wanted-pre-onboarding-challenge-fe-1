@@ -3,16 +3,19 @@ import ModalPortal from 'ModalPortal';
 import React, { MouseEvent } from 'react';
 import { useRecoilState } from 'recoil';
 import { modalSelector } from 'recoil/modal.recoil';
-import { ButtonArea, Content, Wrapper } from '../style';
+import { ButtonArea, Content, Wrapper } from './style';
 
-function Alert() {
-	const [{ isOpen, message, handleOk }, setModal] =
+function Modal() {
+	const [{ isOpen, message, handleOk, handleClose }, setModal] =
 		useRecoilState(modalSelector);
 	const close = (e: MouseEvent<HTMLElement>) => {
 		e.stopPropagation();
-
-		if (handleOk) handleOk?.();
 		setModal({ isOpen: false });
+	};
+
+	const ok = (e: MouseEvent<HTMLElement>) => {
+		handleOk?.();
+		close(e);
 	};
 
 	if (!isOpen) return <></>;
@@ -24,9 +27,14 @@ function Alert() {
 					role="presentation"
 					onClick={(e) => e.stopPropagation()}
 				>
-					<h3>{message} ⚠️</h3>
+					<h3>{message}</h3>
 					<div css={ButtonArea}>
-						<button className="btn_ok" type="button" onClick={close}>
+						{handleClose && (
+							<button className="btn_cancel" type="button" onClick={close}>
+								취소
+							</button>
+						)}
+						<button className="btn_ok" type="button" onClick={ok}>
 							확인
 						</button>
 					</div>
@@ -36,4 +44,4 @@ function Alert() {
 	);
 }
 
-export default Alert;
+export default Modal;

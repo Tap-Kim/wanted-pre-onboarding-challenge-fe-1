@@ -1,5 +1,5 @@
 import { Global } from '@emotion/react';
-import Alert from 'components/Modal/Alert/Alert';
+import Alert from 'components/Modal/Modal';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RecoilRoot } from 'recoil';
