@@ -32,7 +32,10 @@ function Login() {
 		const result = await login({ email, password });
 		if (result.token) {
 			const { token } = result;
+
 			localStorage.setItem('token', token);
+			localStorage.setItem('email', email);
+
 			navigate('/todo');
 			return;
 		}
