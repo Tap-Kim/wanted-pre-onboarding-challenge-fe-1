@@ -15,24 +15,31 @@ export const Wrapper = css`
 	font-weight: 800;
 	font-size: larger;
 
-	.nav_area {
-		${_size('100vw', '50px')}
-		${_flexbox('end')}
-		padding: 10px;
+	.float_btn {
+		position: fixed;
+		${_flexbox()}
+		${_size('60px')}
+		bottom: 40px;
+		right: 40px;
+		background-color: #0c9;
+		color: #fff;
+		border-radius: 50px;
+		text-align: center;
+		box-shadow: 2px 2px 3px #999;
 
 		& button {
-			background-color: #eb510d94;
-			margin-right: 60px;
+			${_size('100%')}
+			border-radius: 50px;
 			border: none;
-			border-radius: 30px;
-			${_size('100px', '35px')}
+			background-color: #fff0;
 
-			font-size: medium;
+			font-size: xx-large;
 			font-weight: 800;
 			color: #ffffff;
+			border: none;
 
 			:active {
-				background-color: #b33700e6;
+				background-color: #fff0;
 			}
 		}
 	}
@@ -48,4 +55,6 @@ export const Header = css`
 
 	text-align: center;
 	color: #ffffff;
+
+	transition: all 0.2s;
 `;

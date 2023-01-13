@@ -41,3 +41,7 @@ export const _ellipsis = css`
 	-ms-text-overflow: ellipsis;
 	text-overflow: ellipsis;
 `;
+
+export const _hoverShadow = css`
+	box-shadow: 0px 0px 0px 0px #007144;
+`;

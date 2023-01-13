@@ -8,6 +8,7 @@ export const globalStyles = css`
 		font-family: 'AvenirStd';
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
+		font-family: 'Roboto', Arial;
 	}
 
 	*:focus {

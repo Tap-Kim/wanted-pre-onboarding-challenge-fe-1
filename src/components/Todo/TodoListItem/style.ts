@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
-import { _flexbox, _size } from 'styles/mixin.style';
+import { _flexbox, _hoverShadow, _size } from 'styles/mixin.style';
 
 export const TodoCommonStyle = css`
-	${_size('80vw', '50px')}
+	${_size('80vw', '60px')}
 	padding: 20px;
 	margin: 5px;
 
@@ -46,8 +46,17 @@ export const ItemWrapper = css`
 	${_flexbox()}
 	${TodoWidthStyle}
 
+	&:hover {
+		${_hoverShadow}
+		background: #00ae68b8;
+		color: #ffffff;
+	}
 
-	background-color: #ffc883b0;
+	transition: all 0.2s;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+		0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07),
+		0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
+	margin: 10px 0px;
 
 	cursor: pointer;
 
@@ -61,10 +70,15 @@ export const ItemWrapper = css`
 	}
 
 	input {
-		border: none;
+		width: 70%;
+		border: 0.5px solid #0048ff;
 		border-radius: 10px;
 		padding: 5px;
-		height: 25px;
+		height: 30px;
+
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+			0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07),
+			0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
 	}
 
 	img {
