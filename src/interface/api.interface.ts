@@ -1,4 +1,4 @@
-import { ListItem } from './todo.interface';
+import { Todo } from './todo.interface';
 
 export interface ErrorResult {
 	details: string;
@@ -15,11 +15,11 @@ export interface AuthResponse {
 }
 
 export interface TodosResponse {
-	data: ListItem[] | null;
+	data: Todo[] | null;
 }
 
 export interface TodoResponse {
-	data: ListItem;
+	data: Todo;
 }
 
 export interface TodosRequest {
