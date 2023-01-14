@@ -1,43 +1,26 @@
 /** @jsxImportSource @emotion/react */
+import dayjs from 'dayjs';
+import { ItemWrapper } from './style';
 
-import { getTodo } from 'api/todo.api';
-import { AxiosError } from 'axios';
-import { Todo } from 'interface/todo.interface';
-import React, { useEffect, useState } from 'react';
-import { formatDate } from 'utils/util';
-import { Header, Section, Wrapper } from './style';
-
-const initValue: Todo = {
-	title: '',
-	content: '',
-	id: '',
-	createdAt: '',
-	updatedAt: '',
-};
 function Detail() {
-	const [{ title, content, createdAt }, setTodo] = useState(initValue);
-	useEffect(() => {
-		onCallTodo();
-	}, []);
+	// eslint-disable-next-line react/react-in-jsx-scope
+	return <div>Detail</div>;
 
-	const onCallTodo = async () => {
-		const id = window.location.pathname.substring(6);
-		const { data: todoResponse } = await getTodo(id);
-		setTodo(todoResponse);
-	};
-
-	return (
-		<div css={Wrapper}>
-			<div css={Header}>
-				<h1>{title}</h1>
-				<p className="header_date">Date: {formatDate(createdAt)}</p>
-				<hr />
-			</div>
-			<section css={Section}>
-				<p>{content}</p>
-			</section>
-		</div>
-	);
+	// const create = dayjs(createdAt, 'YYYY-MM-DD HH:mm:ss').format('YY-MM-DD');
+	// const update = dayjs(updatedAt, 'YYYY-MM-DD HH:mm:ss').format('YY-MM-DD');
+	// return (
+	// 	<li
+	// 		css={ItemWrapper}
+	// 		role="presentation"
+	// 		data-id={id}
+	// 		onClick={handleClickTodo}
+	// 	>
+	// 		<div className="todo_title">{title}</div>
+	// 		<div className="todo_content">{content}</div>
+	// 		<div className="todo_create_at">{create}</div>
+	// 		<div className="todo_update_at">{update}</div>
+	// 	</li>
+	// );
 }
 
 export default Detail;

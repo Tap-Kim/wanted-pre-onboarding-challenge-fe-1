@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { Todo } from 'interface/todo.interface';
+import { ListItem } from 'interface/todo.interface';
 import React, { ChangeEvent, MouseEventHandler } from 'react';
 import { formatDate } from 'utils/util';
 import { ItemWrapper } from './style';
@@ -7,8 +7,8 @@ import { ItemWrapper } from './style';
 const deleteIcon = `${process.env.PUBLIC_URL}/icons/delete.png`;
 const editIcon = `${process.env.PUBLIC_URL}/icons/edit.png`;
 
-interface Props extends Todo {
-	handleClickTodo: (id: string) => void;
+interface Props extends ListItem {
+	handleClickTodo: MouseEventHandler<HTMLLIElement>;
 	handleDelete: MouseEventHandler<HTMLImageElement>;
 	handleEdit: MouseEventHandler<HTMLImageElement>;
 	handleChange: (
@@ -36,7 +36,7 @@ function TodoListItem({
 			css={ItemWrapper}
 			role="presentation"
 			data-id={id}
-			onClick={() => handleClickTodo(id)}
+			onClick={handleClickTodo}
 		>
 			<div className="todo_title">
 				{isEdit ? (

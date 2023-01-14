@@ -1,6 +1,6 @@
 import { createTodo, deleteTodo, getTodos, updateTodo } from 'api/todo.api';
 import { ErrorResult } from 'interface/api.interface';
-import { Todo } from 'interface/todo.interface';
+import { ListItem } from 'interface/todo.interface';
 import { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
@@ -9,7 +9,7 @@ import { modalState } from 'recoil/modal.recoil';
 const useTodo = () => {
 	const navigate = useNavigate();
 	const setModal = useSetRecoilState(modalState);
-	const [todos, setTodos] = useState<Todo[]>([]);
+	const [todos, setTodos] = useState<ListItem[]>([]);
 
 	useEffect(() => {
 		onCallList();
@@ -109,7 +109,8 @@ const useTodo = () => {
 		setTodos(newTodos);
 	};
 
-	const handleClickTodo = (id: string) => {
+	const handleClickTodo = (event: MouseEvent<HTMLLIElement>) => {
+		const { id } = (event.target as HTMLLIElement).dataset;
 		navigate(`/todo/${id}`);
 	};
 

@@ -1,29 +1,49 @@
 import { css } from '@emotion/react';
-import { _size } from 'styles/mixin.style';
+import { _flexbox, _size } from 'styles/mixin.style';
 
-export const Wrapper = css`
-	height: auto;
-	min-height: calc(100vh - 70px);
-	overflow: auto;
+export const TodoCommonStyle = css`
+	${_size('80vw', '50px')}
+	padding: 20px;
+	margin: 5px;
 
-	align-items: center;
+	font-weight: 800;
+	font-size: larger;
 
-	padding: 0px 20px;
+	border-radius: 15px;
 `;
 
-export const Header = css`
-	h1 {
+export const TodoWidthStyle = css`
+	.todo_title {
+		width: 150px;
 	}
-
-	.header_date {
-		color: #4d4d4dab;
-		font-weight: 600;
-		margin: 0;
+	.todo_content {
+		width: 350px;
+	}
+	.todo_create_at {
+		width: 130px;
+	}
+	.todo_update_at {
+		width: 130px;
 	}
 `;
 
-export const Section = css`
-	p {
-		font-size: large;
+export const ItemWrapper = css`
+	${TodoCommonStyle}
+	${_flexbox()}
+	${TodoWidthStyle}
+
+
+	background-color: #ffc883b0;
+
+	cursor: pointer;
+
+	:active {
+		background-color: #ffd583f5;
+		color: #ffffff;
+		border-bottom: 2px solid #000000;
+		box-shadow: 0px 2px 2px 0px #686868;
+	}
+
+	span {
 	}
 `;
