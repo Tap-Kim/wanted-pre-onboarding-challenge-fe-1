@@ -84,5 +84,12 @@ export const ItemWrapper = css`
 	img {
 		${_size('30px')}
 		margin: 0px 5px;
+		padding: 5px;
+
+		&:hover {
+			${_hoverShadow}
+			background: #ffffff;
+			border-radius: 20px;
+		}
 	}
 `;

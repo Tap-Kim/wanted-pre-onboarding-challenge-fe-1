@@ -1,4 +1,4 @@
-import { createTodo, deleteTodo, getTodos, updateTodo } from 'api/todo.api';
+import { deleteTodo, getTodos, updateTodo } from 'api/todo.api';
 import { ErrorResult } from 'interface/api.interface';
 import { Todo } from 'interface/todo.interface';
 import { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
@@ -16,8 +16,11 @@ const useTodo = () => {
 	}, []);
 
 	const handleAddTodo = async () => {
-		const { data } = await createTodo({ title: '새 일감', content: '새 내용' });
-		setTodos((prev) => [...prev, data]);
+		setModal({
+			id: 'newTodoModal',
+			isOpen: true,
+			handleOk: () => onCallList(),
+		});
 	};
 
 	const handleDelete = (event: MouseEvent<HTMLImageElement>) => {
@@ -42,6 +45,7 @@ const useTodo = () => {
 
 		if (!data) {
 			setModal({
+				id: 'alert',
 				isOpen: true,
 				message: '수정 실패',
 			});
@@ -64,6 +68,7 @@ const useTodo = () => {
 		}
 
 		setModal({
+			id: 'alert',
 			isOpen: true,
 			message: (result as unknown as ErrorResult).details,
 			handleOk: () => navigate('/login'),
@@ -72,6 +77,7 @@ const useTodo = () => {
 
 	const onCallDelete = (id: string) => {
 		setModal({
+			id: 'confirm',
 			isOpen: true,
 			message: '일감을 지우시겠습니까?',
 			handleClose: () => {},
@@ -79,6 +85,7 @@ const useTodo = () => {
 				const data = await deleteTodo(id);
 				if (data.data !== null) {
 					setModal({
+						id: 'alert',
 						isOpen: true,
 						message: (data as unknown as ErrorResult).details,
 					});
@@ -116,6 +123,7 @@ const useTodo = () => {
 	return {
 		todos,
 		setTodos,
+		onCallList,
 		handleAddTodo,
 		handleDelete,
 		handleEdit,

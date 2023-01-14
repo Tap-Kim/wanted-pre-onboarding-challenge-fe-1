@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { Todo } from 'interface/todo.interface';
-import React, { ChangeEvent, MouseEventHandler } from 'react';
+import React, { MouseEventHandler } from 'react';
 import { formatDate } from 'utils/util';
 import { ItemWrapper } from './style';
 
@@ -11,10 +11,6 @@ interface Props extends Todo {
 	handleClickTodo: (id: string) => void;
 	handleDelete: MouseEventHandler<HTMLImageElement>;
 	handleEdit: MouseEventHandler<HTMLImageElement>;
-	handleChange: (
-		event: ChangeEvent<HTMLInputElement>,
-		type: 'title' | 'content'
-	) => void;
 }
 
 function TodoListItem({
@@ -23,11 +19,9 @@ function TodoListItem({
 	content,
 	createdAt,
 	updatedAt,
-	isEdit,
 	handleClickTodo,
 	handleDelete,
 	handleEdit,
-	handleChange,
 }: Props) {
 	const create = formatDate(createdAt);
 	const update = formatDate(updatedAt);
@@ -39,30 +33,10 @@ function TodoListItem({
 			onClick={() => handleClickTodo(id)}
 		>
 			<div className="todo_title">
-				{isEdit ? (
-					<input
-						data-id={id}
-						value={title}
-						placeholder="제목을 입력해주세요."
-						onClick={(e) => e.stopPropagation()}
-						onChange={(e) => handleChange(e, 'title')}
-					/>
-				) : (
-					<p title={title}>{title}</p>
-				)}
+				<p title={title}>{title}</p>
 			</div>
 			<div className="todo_content">
-				{isEdit ? (
-					<input
-						data-id={id}
-						value={content}
-						placeholder="내용을 입력해주세요."
-						onClick={(e) => e.stopPropagation()}
-						onChange={(e) => handleChange(e, 'content')}
-					/>
-				) : (
-					<p title={content}>{content}</p>
-				)}
+				<p title={content}>{content}</p>
 			</div>
 
 			<div className="todo_create_at">

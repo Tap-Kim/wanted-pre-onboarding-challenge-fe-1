@@ -3,22 +3,40 @@ import ModalPortal from 'ModalPortal';
 import React, { MouseEvent } from 'react';
 import { useRecoilState } from 'recoil';
 import { modalSelector } from 'recoil/modal.recoil';
-import { ButtonArea, Content, Wrapper } from './style';
+import { ButtonArea } from './ButtonArea/ButtonArea';
+import NewTodo from './NewTodo/NewTodo';
+import { Content, Wrapper } from './style';
 
 function Modal() {
-	const [{ isOpen, message, handleOk, handleClose }, setModal] =
+	const [{ id, isOpen, message, handleOk }, setModal] =
 		useRecoilState(modalSelector);
-	const close = (e: MouseEvent<HTMLElement>) => {
+	const close = (e: MouseEvent<HTMLButtonElement>) => {
 		e.stopPropagation();
-		setModal({ isOpen: false });
+		setModal({ id, isOpen: false });
 	};
 
-	const ok = (e: MouseEvent<HTMLElement>) => {
+	const ok = (e: MouseEvent<HTMLButtonElement>) => {
+		e.stopPropagation();
 		handleOk?.();
 		close(e);
 	};
 
 	if (!isOpen) return <></>;
+
+	const component = () => {
+		switch (id) {
+			case 'newTodoModal':
+				return <NewTodo {...{ id, ok, close }} />;
+			default:
+				return (
+					<>
+						<h3>{message}</h3>
+						<ButtonArea {...{ id, ok, close }} />
+					</>
+				);
+		}
+	};
+
 	return (
 		<ModalPortal selector="#modal">
 			<section css={Wrapper} role="presentation" onClick={close}>
@@ -27,17 +45,7 @@ function Modal() {
 					role="presentation"
 					onClick={(e) => e.stopPropagation()}
 				>
-					<h3>{message}</h3>
-					<div css={ButtonArea}>
-						{handleClose && (
-							<button className="btn_cancel" type="button" onClick={close}>
-								취소
-							</button>
-						)}
-						<button className="btn_ok" type="button" onClick={ok}>
-							확인
-						</button>
-					</div>
+					{component()}
 				</div>
 			</section>
 		</ModalPortal>

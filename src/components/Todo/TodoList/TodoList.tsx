@@ -5,14 +5,8 @@ import TodoListItem from '../TodoListItem/TodoListItem';
 import { Header, Wrapper } from './style';
 
 function TodoList() {
-	const {
-		todos,
-		handleAddTodo,
-		handleDelete,
-		handleEdit,
-		handleChange,
-		handleClickTodo,
-	} = useTodo();
+	const { todos, handleAddTodo, handleDelete, handleEdit, handleClickTodo } =
+		useTodo();
 
 	return (
 		<section css={Wrapper}>
@@ -30,7 +24,6 @@ function TodoList() {
 					handleClickTodo={handleClickTodo}
 					handleDelete={handleDelete}
 					handleEdit={handleEdit}
-					handleChange={handleChange}
 				/>
 			))}
 			<nav className="float_btn">

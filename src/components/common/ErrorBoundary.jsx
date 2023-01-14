@@ -18,7 +18,6 @@ class ErrorBoundary extends React.Component {
 	}
 
 	render() {
-		console.log(this.state);
 		if (this.state.hasError) {
 			return <div css={Wrapper}>{this.state.error.message}</div>;
 		}

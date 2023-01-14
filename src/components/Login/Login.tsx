@@ -41,6 +41,7 @@ function Login() {
 		}
 
 		setModal({
+			id: 'alert',
 			isOpen: true,
 			message: (result as ErrorResult).details,
 		});

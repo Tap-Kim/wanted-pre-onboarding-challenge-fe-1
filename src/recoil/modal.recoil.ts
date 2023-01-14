@@ -1,6 +1,7 @@
 import { atom, selector } from 'recoil';
 
 export interface ModalAtom {
+	id: 'alert' | 'confirm' | 'newTodoModal';
 	isOpen: boolean;
 	message?: string;
 	modalProps?: any;
@@ -10,7 +11,7 @@ export interface ModalAtom {
 }
 export const modalState = atom<ModalAtom>({
 	key: 'modalState',
-	default: { isOpen: false },
+	default: { isOpen: false, id: 'alert' },
 });
 
 export const modalSelector = selector<ModalAtom>({
