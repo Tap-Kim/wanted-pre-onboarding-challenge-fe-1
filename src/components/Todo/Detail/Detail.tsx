@@ -4,8 +4,7 @@ import { getTodo, updateTodo } from 'api/todo.api';
 import { Todo } from 'interface/todo.interface';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
-import { modalState } from 'recoil/modal.recoil';
+import toast from 'utils/toast';
 import { formatDate } from 'utils/util';
 import { Header, Section, Wrapper } from './style';
 
@@ -18,7 +17,6 @@ const initValue: Todo = {
 };
 function Detail() {
 	const navigate = useNavigate();
-	const setModal = useSetRecoilState(modalState);
 
 	const [{ title, content, createdAt }, setTodo] = useState(initValue);
 	const pathName = window.location.pathname;
@@ -47,15 +45,12 @@ function Detail() {
 			const { data } = await updateTodo({ id, title, content });
 
 			if (!data) {
-				setModal({
-					id: 'alert',
-					isOpen: true,
-					message: '수정 실패',
-				});
+				toast({ text: '수정 실패!', status: 'error' });
 			}
 			navigate(`/todo/${id}`);
 			return;
 		}
+		toast({ text: '수정 성공!', status: 'success' });
 		navigate(`/todo/edit/${id}`);
 	};
 

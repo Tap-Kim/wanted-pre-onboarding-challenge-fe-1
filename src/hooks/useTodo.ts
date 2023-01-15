@@ -1,10 +1,11 @@
-import { deleteTodo, getTodos, updateTodo } from 'api/todo.api';
+import { deleteTodo, getTodos } from 'api/todo.api';
 import { ErrorResult } from 'interface/api.interface';
 import { Todo } from 'interface/todo.interface';
 import { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'recoil/modal.recoil';
+import toast from 'utils/toast';
 
 const useTodo = () => {
 	const navigate = useNavigate();
@@ -19,7 +20,10 @@ const useTodo = () => {
 		setModal({
 			id: 'newTodoModal',
 			isOpen: true,
-			handleOk: () => onCallList(),
+			handleOk: () => {
+				onCallList();
+				toast({ text: '생성 완료!', status: 'success' });
+			},
 		});
 	};
 
@@ -43,6 +47,7 @@ const useTodo = () => {
 				}
 
 				setTodos((prev) => prev.filter((todo) => todo.id !== id));
+				toast({ text: '삭제 완료!', status: 'success' });
 			},
 		});
 	};
