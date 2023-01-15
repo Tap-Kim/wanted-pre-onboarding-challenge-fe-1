@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RecoilRoot } from 'recoil';
 import { globalStyles } from 'styles/global.style';
+import { Toaster } from 'react-hot-toast';
 import App from './App';
 
 const root = ReactDOM.createRoot(
@@ -16,6 +17,7 @@ root.render(
 		<RecoilRoot>
 			<App />
 			<Alert />
+			<Toaster />
 		</RecoilRoot>
 	</>
 );
