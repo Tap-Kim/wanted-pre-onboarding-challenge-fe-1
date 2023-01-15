@@ -26,7 +26,11 @@ const useAuth = () => {
 
 	const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === 'Enter') {
+<<<<<<< HEAD
 			if (passwordCheck) {
+=======
+			if (!passwordCheck) {
+>>>>>>> 783428724fbd8623ca13e7e5cc10d09386a06b1f
 				handleSignUp();
 			} else {
 				handleLogin();
