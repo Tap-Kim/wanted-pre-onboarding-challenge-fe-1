@@ -25,62 +25,12 @@ const useTodo = () => {
 
 	const handleDelete = (event: MouseEvent<HTMLImageElement>) => {
 		event.stopPropagation();
-		const { id } = (event.target as HTMLLIElement).dataset;
-		onCallDelete(id!);
-	};
+		const { id = '' } = (event.target as HTMLLIElement).dataset;
 
-	const handleEdit = async (event: MouseEvent<HTMLImageElement>) => {
-		event.stopPropagation();
-		const { id } = (event.target as HTMLLIElement).dataset;
-		const { title, content, isEdit } = todos.filter(
-			(todo) => todo.id === id
-		)[0];
-
-		if (!isEdit && id) {
-			onSetEditTodos(id);
-			return;
-		}
-
-		const { data } = await updateTodo({ id, title, content });
-
-		if (!data) {
-			setModal({
-				id: 'alert',
-				isOpen: true,
-				message: '수정 실패',
-			});
-			return;
-		}
-
-		const newTodos = todos.map((item) => ({
-			...item,
-			isEdit: item.id === id ? false : item.isEdit,
-		}));
-		setTodos(newTodos);
-	};
-
-	const onCallList = async () => {
-		const result = await getTodos();
-		if (result.data) {
-			const newTodos = result.data.map((todo) => ({ ...todo, isEdit: false }));
-			setTodos(newTodos);
-			return;
-		}
-
-		setModal({
-			id: 'alert',
-			isOpen: true,
-			message: (result as unknown as ErrorResult).details,
-			handleOk: () => navigate('/login'),
-		});
-	};
-
-	const onCallDelete = (id: string) => {
 		setModal({
 			id: 'confirm',
 			isOpen: true,
 			message: '일감을 지우시겠습니까?',
-			handleClose: () => {},
 			handleOk: async () => {
 				const data = await deleteTodo(id);
 				if (data.data !== null) {
@@ -97,9 +47,19 @@ const useTodo = () => {
 		});
 	};
 
-	const onSetEditTodos = (id: string) => {
-		const newTodos = todos.map((item) => ({ ...item, isEdit: item.id === id }));
-		setTodos(newTodos);
+	const onCallList = async () => {
+		const result = await getTodos();
+		if (result.data) {
+			setTodos(result.data);
+			return;
+		}
+
+		setModal({
+			id: 'alert',
+			isOpen: true,
+			message: (result as unknown as ErrorResult).details,
+			handleOk: () => navigate('/login'),
+		});
 	};
 
 	const handleChange = (
@@ -126,10 +86,8 @@ const useTodo = () => {
 		onCallList,
 		handleAddTodo,
 		handleDelete,
-		handleEdit,
 		handleChange,
 		handleClickTodo,
-		onCallDelete,
 	};
 };
 

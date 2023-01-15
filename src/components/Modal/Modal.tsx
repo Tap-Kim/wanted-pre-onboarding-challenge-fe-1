@@ -4,7 +4,7 @@ import React, { MouseEvent } from 'react';
 import { useRecoilState } from 'recoil';
 import { modalSelector } from 'recoil/modal.recoil';
 import { ButtonArea } from './ButtonArea/ButtonArea';
-import NewTodo from './NewTodo/NewTodo';
+import TodoModal from './TodoModal/TodoModal';
 import { Content, Wrapper } from './style';
 
 function Modal() {
@@ -26,7 +26,7 @@ function Modal() {
 	const component = () => {
 		switch (id) {
 			case 'newTodoModal':
-				return <NewTodo {...{ id, ok, close }} />;
+				return <TodoModal {...{ id, ok, close }} />;
 			default:
 				return (
 					<>

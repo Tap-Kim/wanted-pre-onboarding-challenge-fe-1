@@ -6,7 +6,7 @@ import React, { MouseEvent, useState } from 'react';
 import { ButtonArea } from '../ButtonArea/ButtonArea';
 import { Wrapper } from './style';
 
-function NewTodo({ id, ok, close }: IButtonArea) {
+function TodoModal({ id, ok, close }: IButtonArea) {
 	const [title, setTitle] = useState('');
 	const [content, setContent] = useState('');
 
@@ -42,4 +42,4 @@ function NewTodo({ id, ok, close }: IButtonArea) {
 	);
 }
 
-export default NewTodo;
+export default TodoModal;

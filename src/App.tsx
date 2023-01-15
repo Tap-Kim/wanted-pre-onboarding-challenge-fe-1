@@ -5,7 +5,6 @@ import Main from 'components/layout/Main';
 import Login from 'components/Login/Login';
 import NotFound from 'components/NotFound/NotFound';
 import SignUp from 'components/SignUp/SignUp';
-
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
 
@@ -35,6 +34,16 @@ function App() {
 							/>
 							<Route
 								path=":todoId"
+								element={
+									<ErrorBoundary>
+										<Suspense fallback={<Loading />}>
+											<Detail />
+										</Suspense>
+									</ErrorBoundary>
+								}
+							/>
+							<Route
+								path="edit/:todoId"
 								element={
 									<ErrorBoundary>
 										<Suspense fallback={<Loading />}>

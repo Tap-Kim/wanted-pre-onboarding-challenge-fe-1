@@ -6,7 +6,6 @@ export interface ModalAtom {
 	message?: string;
 	modalProps?: any;
 	handleOk?: VoidFunction;
-	openModal?: VoidFunction;
 	handleClose?: VoidFunction;
 }
 export const modalState = atom<ModalAtom>({
