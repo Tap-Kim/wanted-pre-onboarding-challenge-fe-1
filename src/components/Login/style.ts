@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { btnDefault, inputDefault } from 'styles/global.style';
 import { _flexbox, _flexDirection, _size } from 'styles/mixin.style';
 
 export const Wrapper = css`
@@ -23,8 +22,6 @@ export const InputBox = css`
 		width: 100px;
 	}
 
-	${inputDefault}
-
 	& input {
 		${_size('200px', '20px')}
 	}
@@ -32,18 +29,25 @@ export const InputBox = css`
 
 export const ButtonBox = css`
 	${_flexbox()}
-	${btnDefault}
 
-	& :disabled {
-		color: #e6e6e6;
-		background-color: #919191ba;
-		cursor: not-allowed;
+	border-radius: 10px;
+	font-weight: 700;
+	background-color: #dddddd;
+	color: #414141;
 
-		& :active,
-		:hover {
-			color: #e6e6e6;
-			background-color: #919191ba;
-			box-shadow: none;
+	& button {
+		${_size('200px', 'auto')}
+		padding: 5px;
+
+		&:disabled {
+			background-color: #7b7b7b42;
+			color: #5a5858e3;
+		}
+		&:active {
+			background-color: #8b8b8b;
+			border-bottom: 1px solid #000000;
+			box-shadow: 0px 1.5px 1px 0px #686868;
+			color: #ffffff;
 		}
 	}
 `;

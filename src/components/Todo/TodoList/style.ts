@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { themaStyles } from 'styles/global.style';
 import { _flexbox, _flexDirection, _size } from 'styles/mixin.style';
 import { TodoCommonStyle, TodoWidthStyle } from '../TodoListItem/style';
 
@@ -52,7 +51,7 @@ export const Header = css`
 	${TodoWidthStyle}
 
 	height: 20px;
-	background-color: ${themaStyles['thema-color']};
+	background-color: #0048ff82;
 
 	text-align: center;
 	color: #ffffff;

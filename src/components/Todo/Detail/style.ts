@@ -1,6 +1,17 @@
 import { css } from '@emotion/react';
-import { borderPadding, btnDefault, inputDefault } from 'styles/global.style';
-import { _flexDirection, _size } from 'styles/mixin.style';
+import {
+	_size,
+	_flexbox,
+	_flexDirection,
+	_hoverShadow,
+} from 'styles/mixin.style';
+
+const borderPadding = css`
+	border-bottom: 1px solid #0048ff;
+	background-color: #b3c3db24;
+	border-radius: 10px;
+	padding: 5px;
+`;
 
 export const Wrapper = css`
 	height: auto;
@@ -17,10 +28,41 @@ export const Wrapper = css`
 		justify-content: space-between;
 		align-items: center;
 
-		${btnDefault}
+		button {
+			${_size('90px', '50px')}
+
+			background-color: #0048ff82;
+			border-radius: 5px;
+			border: none;
+			color: #ffffff;
+
+			font-size: medium;
+			font-weight: 600;
+			margin: 0px 5px;
+
+			cursor: pointer;
+
+			&:hover {
+				background: #0048ffe6;
+				${_hoverShadow}
+				color: #ffffff;
+			}
+
+			&:active {
+				background-color: #8b8b8b;
+				border-bottom: 2px solid #000000;
+				box-shadow: 0px 2px 2px 0px #686868;
+			}
+		}
 	}
 
-	${inputDefault}
+	input,
+	textarea {
+		${_size('70%', '30px')}
+		border: none;
+		${borderPadding}
+	}
+
 	textarea {
 		resize: none;
 		${_size('98%', '100vh')}
