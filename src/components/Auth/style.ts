@@ -6,12 +6,11 @@ export const Wrapper = css`
 	${_flexbox()}
 	${_flexDirection('column')}
 
-
-min-height: calc(100vh - 70px);
+	min-height: calc(100vh - 70px);
 `;
 
 export const InputArea = css`
-	${_size('300px', '100px')}
+	${_size('400px', '200px')}
 	font-weight: 800;
 `;
 
@@ -19,14 +18,14 @@ export const InputBox = css`
 	${_flexbox()}
 
 	& p {
-		margin: 10px;
-		width: 100px;
+		margin: 20px 0px;
+		width: 200px;
 	}
 
 	${inputDefault}
 
 	& input {
-		${_size('200px', '20px')}
+		${_size('500px', '30px')}
 	}
 `;
 
