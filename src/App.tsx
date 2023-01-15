@@ -2,12 +2,12 @@ import ErrorBoundary from 'components/common/ErrorBoundary';
 import Loading from 'components/common/Loading';
 import Header from 'components/layout/Header';
 import Main from 'components/layout/Main';
-import Login from 'components/Auth/Login/Login';
 import NotFound from 'components/NotFound/NotFound';
-import SignUp from 'components/Auth/SignUp/SignUp';
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
 
+const Login = lazy(() => import('components/Auth/Login/Login'));
+const SignUp = lazy(() => import('components/Auth/SignUp/SignUp'));
 const TodoList = lazy(() => import('components/Todo/TodoList/TodoList'));
 const Detail = lazy(() => import('components/Todo/Detail/Detail'));
 
