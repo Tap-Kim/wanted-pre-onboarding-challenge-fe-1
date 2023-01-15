@@ -34,7 +34,7 @@ function Header() {
 	};
 
 	const handlePage = () => {
-		navigate(isLoginPage ? '/signUp' : '/login');
+		navigate(isLoginPage ? '/signup' : '/login');
 	};
 
 	return (
@@ -49,7 +49,7 @@ function Header() {
 					</span>
 				) : (
 					<button type="button" onClick={handlePage}>
-						{isLoginPage ? '회원가입' : '로그인'}
+						{isLoginPage ? 'SignUp' : 'Login'}
 					</button>
 				)}
 			</strong>
