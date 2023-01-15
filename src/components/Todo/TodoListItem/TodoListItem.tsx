@@ -10,7 +10,6 @@ const editIcon = `${process.env.PUBLIC_URL}/icons/edit.png`;
 interface Props extends Todo {
 	handleClickTodo: (id: string) => void;
 	handleDelete: MouseEventHandler<HTMLImageElement>;
-	handleEdit: MouseEventHandler<HTMLImageElement>;
 }
 
 function TodoListItem({
@@ -21,7 +20,6 @@ function TodoListItem({
 	updatedAt,
 	handleClickTodo,
 	handleDelete,
-	handleEdit,
 }: Props) {
 	const create = formatDate(createdAt);
 	const update = formatDate(updatedAt);
@@ -60,7 +58,6 @@ function TodoListItem({
 					alt="editIcon"
 					className="btn_delete"
 					data-id={id}
-					onClick={handleEdit}
 				/>
 			</div>
 		</li>

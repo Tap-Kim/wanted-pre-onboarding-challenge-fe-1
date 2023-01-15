@@ -4,5 +4,4 @@ export interface Todo {
 	id: string;
 	createdAt: string;
 	updatedAt: string;
-	isEdit?: boolean;
 }
