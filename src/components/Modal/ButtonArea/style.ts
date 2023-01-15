@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { themaStyles } from 'styles/global.style';
 import {
 	_flexbox,
 	_flexDirection,
@@ -27,7 +28,7 @@ export const Wrapper = css`
 	}
 
 	.btn_ok {
-		background-color: #0048ff82;
+		background-color: ${themaStyles['thema-color']};
 		border-radius: 5px;
 		border: none;
 

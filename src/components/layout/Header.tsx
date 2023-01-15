@@ -2,25 +2,56 @@
 import { css } from '@emotion/react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { modalState } from 'recoil/modal.recoil';
+import { btnDefault } from 'styles/global.style';
 import { _flexbox } from 'styles/mixin.style';
 
 function Header() {
+	const setModal = useSetRecoilState(modalState);
 	const navigate = useNavigate();
 	const user = localStorage.getItem('email');
 
-	const handleClick = () => {
+	const pathName = window.location.pathname;
+	const isLoginPage = pathName.indexOf('/login') > -1;
+
+	const handleLogoClick = () => {
 		const endPoint = user ? '/todo' : '/login';
 		navigate(endPoint);
 	};
 
+	const handleAccountClick = () => {
+		setModal({
+			id: 'confirm',
+			isOpen: true,
+			message: '로그아웃 하시겠습니까?',
+			handleOk: () => {
+				localStorage.removeItem('email');
+				localStorage.removeItem('token');
+				navigate('/login');
+			},
+		});
+	};
+
+	const handlePage = () => {
+		navigate(isLoginPage ? '/signUp' : '/login');
+	};
+
 	return (
 		<header css={Wrapper}>
-			<h2 role="presentation" onClick={handleClick}>
+			<h2 role="presentation" onClick={handleLogoClick}>
 				ToDo List
 			</h2>
 			<strong>
-				{user}
-				{user && '님'}
+				{user ? (
+					<span role="presentation" onClick={handleAccountClick}>
+						{`${user}님`}
+					</span>
+				) : (
+					<button type="button" onClick={handlePage}>
+						{isLoginPage ? '회원가입' : '로그인'}
+					</button>
+				)}
 			</strong>
 		</header>
 	);
@@ -50,4 +81,6 @@ const Wrapper = css`
 	}
 
 	cursor: pointer;
+
+	${btnDefault}
 `;
