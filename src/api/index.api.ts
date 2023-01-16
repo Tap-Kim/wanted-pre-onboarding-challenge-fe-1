@@ -1,6 +1,8 @@
+/* eslint-disable no-param-reassign */
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { REQUEST_METHOD } from 'consts/api.const';
 import { ErrorResult } from 'interface/api.interface';
+import toast from 'utils/toast';
 
 const instance = axios.create({
 	baseURL: 'http://localhost:8080',
@@ -11,16 +13,14 @@ instance.defaults.headers.common['Content-Type'] =
 
 instance.interceptors.request.use(
 	(config) => {
-		const auth = localStorage.getItem('token')
-			? { authorization: `${localStorage.getItem('token')}` }
-			: {};
-		return {
-			...config,
-			headers: {
-				...config.headers,
-				...auth,
-			},
-		};
+		const token = localStorage.getItem('token');
+
+		if (token) {
+			config.headers = {};
+			config.headers.authorization = token;
+		}
+
+		return config;
 	},
 	(error) => Promise.reject(error)
 );
@@ -37,16 +37,25 @@ instance.interceptors.response.use(
 				throw new Error(`${response.status}`);
 		}
 	},
-	(error: AxiosError) => {
+	(error: AxiosError<ErrorResult>) => {
+		const isTokenMissing = error.response?.data.details === 'Token is missing';
+
+		if (isTokenMissing) {
+			toast({ text: '토큰이 만료되었습니다.', status: 'error' });
+			return Promise.reject(new Error('Request Error Occur.'));
+		}
+
 		if (axios.isAxiosError(error)) {
 			const { response }: AxiosError = error;
+			const err = response?.data as ErrorResult;
 			switch (response?.status) {
-				case 403:
 				case 400:
+				case 403:
+				case 404:
 				case 409:
 				case 500:
 				default:
-					return response?.data as ErrorResult;
+					toast({ text: err.details ?? 'Error', status: 'error' });
 			}
 		}
 		return Promise.reject(new Error('Request Error Occur.'));
