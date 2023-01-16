@@ -19,32 +19,23 @@
     },
     "plugins": ["react", "react-hooks", "@typescript-eslint"],
     "rules": {
-        "react/no-unknown-property": ["error", { "ignore": ["css"] }],
-        "no-underscore-dangle": "off",
-        "no-use-before-define": "off",
-        "react/jsx-no-useless-fragment": "off",
-        "import/prefer-default-export": "off",
-        "react/require-default-props": "off",
-        "react-hooks/rules-of-hooks": "error",
-        "react/jsx-props-no-spreading": "off",
-        "@typescript-eslint/no-empty-function": "off",
-        "react-hooks/exhaustive-deps": "warn",
-        "@typescript-eslint/explicit-function-return-type": "off",
-        "prettier/prettier": "error",
-        "react/jsx-filename-extension": [
-            "error",
-            { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+        "react/react-in-jsx-scope": 0,
+        "react/prefer-stateless-function": 0,
+        "react/jsx-filename-extension": 0,
+        "react/jsx-one-expression-per-line": 0,
+        "no-nested-ternary": 0,
+        "no-unused-vars": "off",
+        "no-undef": "off",
+        "/no-useless-escape": "off",
+        "prettier/prettier": [
+        "error",
+        {
+            "endOfLine": "auto",
+            "useTabs": false
+        }
         ],
-        "import/extensions": [
-            "error",
-            "ignorePackages",
-            {
-                "js": "never",
-                "jsx": "never",
-                "ts": "never",
-                "tsx": "never"
-            }
-        ]
+        "indent": ["error", 2],
+        "@typescript-eslint/no-empty-interface": "off",
     },
     "settings": {
         "import/resolver": {
