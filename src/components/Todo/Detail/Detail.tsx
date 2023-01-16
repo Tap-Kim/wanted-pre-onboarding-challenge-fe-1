@@ -3,7 +3,7 @@
 import { getTodo, updateTodo } from 'api/todo.api';
 import { Todo } from 'interface/todo.interface';
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import toast from 'utils/toast';
 import { formatDate } from 'utils/util';
 import { Header, Section, Wrapper } from './style';
@@ -17,11 +17,10 @@ const initValue: Todo = {
 };
 function Detail() {
 	const navigate = useNavigate();
-
+	const { pathname } = useLocation();
 	const [{ title, content, createdAt }, setTodo] = useState(initValue);
-	const pathName = window.location.pathname;
-	const isEdit = pathName.indexOf('/edit') > -1;
-	const id = pathName.replace(/todo|edit|\//gi, '');
+	const isEdit = pathname.indexOf('/edit') > -1;
+	const id = pathname.replace(/todo|edit|\//gi, '');
 
 	useEffect(() => {
 		onCallTodo();
@@ -46,11 +45,13 @@ function Detail() {
 
 			if (!data) {
 				toast({ text: '수정 실패!', status: 'error' });
+			} else {
+				toast({ text: '수정 성공!', status: 'success' });
 			}
+
 			navigate(`/todo/${id}`);
 			return;
 		}
-		toast({ text: '수정 성공!', status: 'success' });
 		navigate(`/todo/edit/${id}`);
 	};
 
