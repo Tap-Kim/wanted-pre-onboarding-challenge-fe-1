@@ -6,8 +6,8 @@ import NotFound from 'components/NotFound/NotFound';
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
 
-const Login = lazy(() => import('components/Auth/Login/Login'));
-const SignUp = lazy(() => import('components/Auth/SignUp/SignUp'));
+const Login = lazy(() => import('components/Auth/Login'));
+const SignUp = lazy(() => import('components/Auth/SignUp'));
 const TodoList = lazy(() => import('components/Todo/TodoList/TodoList'));
 const Detail = lazy(() => import('components/Todo/Detail/Detail'));
 

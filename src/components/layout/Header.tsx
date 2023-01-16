@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from 'recoil/modal.recoil';
 import { btnDefault } from 'styles/global.style';
@@ -11,9 +11,8 @@ function Header() {
 	const setModal = useSetRecoilState(modalState);
 	const navigate = useNavigate();
 	const user = localStorage.getItem('email');
-
-	const pathName = window.location.pathname;
-	const isLoginPage = pathName.indexOf('/login') > -1;
+	const { pathname } = useLocation();
+	const isLoginPage = pathname.indexOf('/login') > -1;
 
 	const handleLogoClick = () => {
 		const endPoint = user ? '/todo' : '/login';

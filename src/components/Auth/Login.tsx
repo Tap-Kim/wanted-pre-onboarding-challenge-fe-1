@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import useAuth from 'hooks/useAuth';
 import React, { useMemo } from 'react';
-import { ButtonBox, InputArea, InputBox, Wrapper } from '../style';
+import { ButtonBox, InputArea, InputBox, Wrapper } from './style';
 
 function Login() {
 	const {

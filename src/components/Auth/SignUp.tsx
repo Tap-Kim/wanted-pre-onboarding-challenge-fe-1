@@ -3,7 +3,7 @@
 import useAuth from 'hooks/useAuth';
 import React, { useMemo } from 'react';
 import validator from 'validator';
-import { ButtonBox, InputArea, InputBox, Wrapper } from '../style';
+import { ButtonBox, InputArea, InputBox, Wrapper } from './style';
 
 function SignUp() {
 	const {
